@@ -27,6 +27,20 @@ public class Trade : BaseViewModel
     public TradeType Type { get; init; }
     public string Description { get; init; } = string.Empty;
     public int ItemIndex { get; init; } = -1;
+    public long? BalanceAfter
+    {
+        get;
+        set
+        {
+            if (field == value)
+            {
+                return;
+            }
+
+            field = value;
+            OnPropertyChanged();
+        }
+    }
     public string UniqueClusterName => WorldData.GetUniqueNameOrDefault(ClusterIndex);
 
     public bool? IsSelectedForDeletion

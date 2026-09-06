@@ -52,6 +52,7 @@ public class MainWindowViewModel : BaseViewModel
 
     public MainWindowViewModel()
     {
+        MarketActivityBindings = new MarketActivityBindings(TradeMonitoringBindings);
         UpgradeSettings();
         RegisterServerDetectionEvents();
         SetUiElements();
@@ -1716,6 +1717,8 @@ public class MainWindowViewModel : BaseViewModel
     } = new();
 
     public MarketOrdersBindings MarketOrdersBindings { get; } = new();
+
+    public MarketActivityBindings MarketActivityBindings { get; }
 
     public VaultBindings VaultBindings
     {

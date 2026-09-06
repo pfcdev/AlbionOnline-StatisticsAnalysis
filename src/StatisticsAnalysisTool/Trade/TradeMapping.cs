@@ -19,7 +19,8 @@ public static class TradeMapping
                 MailTypeText = trade.MailTypeText,
                 Guid = trade.Guid,
                 MailContent = trade.MailContent,
-                Description = trade.Description
+                Description = trade.Description,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.InstantBuy => new TradeDto()
             {
@@ -30,7 +31,8 @@ public static class TradeMapping
                 InstantBuySellContent = trade.InstantBuySellContent,
                 AuctionEntry = trade.AuctionEntry,
                 Description = trade.Description,
-                ItemIndex = trade.ItemIndex
+                ItemIndex = trade.ItemIndex,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.InstantSell => new TradeDto()
             {
@@ -40,7 +42,8 @@ public static class TradeMapping
                 ClusterIndex = trade.ClusterIndex,
                 InstantBuySellContent = trade.InstantBuySellContent,
                 AuctionEntry = trade.AuctionEntry,
-                Description = trade.Description
+                Description = trade.Description,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.ManualBuy => new TradeDto()
             {
@@ -48,7 +51,8 @@ public static class TradeMapping
                 Id = trade.Id,
                 Ticks = trade.Ticks,
                 InstantBuySellContent = trade.InstantBuySellContent,
-                Description = trade.Description
+                Description = trade.Description,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.ManualSell => new TradeDto()
             {
@@ -56,7 +60,8 @@ public static class TradeMapping
                 Id = trade.Id,
                 Ticks = trade.Ticks,
                 InstantBuySellContent = trade.InstantBuySellContent,
-                Description = trade.Description
+                Description = trade.Description,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.Crafting => new TradeDto()
             {
@@ -65,7 +70,8 @@ public static class TradeMapping
                 Ticks = trade.Ticks,
                 InstantBuySellContent = trade.InstantBuySellContent,
                 Description = trade.Description,
-                ItemIndex = trade.ItemIndex
+                ItemIndex = trade.ItemIndex,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.PlayerTradeIncoming or TradeType.PlayerTradeOutgoing => new TradeDto()
             {
@@ -76,7 +82,8 @@ public static class TradeMapping
                 Description = trade.Description,
                 ItemIndex = trade.ItemIndex,
                 Guid = trade.Guid,
-                PlayerTradeContent = trade.PlayerTradeContent
+                PlayerTradeContent = trade.PlayerTradeContent,
+                BalanceAfter = trade.BalanceAfter
             },
             _ => throw new ArgumentOutOfRangeException()
         };
@@ -95,7 +102,8 @@ public static class TradeMapping
                 MailTypeText = trade.MailTypeText,
                 Guid = trade.Guid,
                 MailContent = trade.MailContent ?? new MailContent(),
-                Description = trade.Description
+                Description = trade.Description,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.InstantBuy => new Trade()
             {
@@ -106,7 +114,8 @@ public static class TradeMapping
                 AuctionEntry = trade.AuctionEntry,
                 InstantBuySellContent = trade.InstantBuySellContent ?? new InstantBuySellContent(),
                 Description = trade.Description,
-                ItemIndex = trade.ItemIndex
+                ItemIndex = trade.ItemIndex,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.InstantSell => new Trade()
             {
@@ -116,7 +125,8 @@ public static class TradeMapping
                 ClusterIndex = trade.ClusterIndex,
                 AuctionEntry = trade.AuctionEntry,
                 InstantBuySellContent = trade.InstantBuySellContent ?? new InstantBuySellContent(),
-                Description = trade.Description
+                Description = trade.Description,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.ManualBuy => new Trade()
             {
@@ -124,7 +134,8 @@ public static class TradeMapping
                 Id = trade.Id,
                 Ticks = trade.Ticks,
                 InstantBuySellContent = trade.InstantBuySellContent ?? new InstantBuySellContent(),
-                Description = trade.Description
+                Description = trade.Description,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.ManualSell => new Trade()
             {
@@ -132,7 +143,8 @@ public static class TradeMapping
                 Id = trade.Id,
                 Ticks = trade.Ticks,
                 InstantBuySellContent = trade.InstantBuySellContent ?? new InstantBuySellContent(),
-                Description = trade.Description
+                Description = trade.Description,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.Crafting => new Trade()
             {
@@ -141,7 +153,8 @@ public static class TradeMapping
                 Ticks = trade.Ticks,
                 InstantBuySellContent = trade.InstantBuySellContent ?? new InstantBuySellContent(),
                 Description = trade.Description,
-                ItemIndex = trade.ItemIndex
+                ItemIndex = trade.ItemIndex,
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.PlayerTradeIncoming or TradeType.PlayerTradeOutgoing => new Trade()
             {
@@ -152,7 +165,8 @@ public static class TradeMapping
                 Description = trade.Description,
                 ItemIndex = trade.ItemIndex,
                 Guid = trade.Guid,
-                PlayerTradeContent = trade.PlayerTradeContent ?? new PlayerTrades.PlayerTradeContent()
+                PlayerTradeContent = trade.PlayerTradeContent ?? new PlayerTrades.PlayerTradeContent(),
+                BalanceAfter = trade.BalanceAfter
             },
             TradeType.Unknown => null,
             _ => null

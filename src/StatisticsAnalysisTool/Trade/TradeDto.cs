@@ -15,6 +15,7 @@ public class TradeDto
     public string Description { get; init; }
     public TradeType Type { get; init; }
     public int ItemIndex { get; set; }
+    public long? BalanceAfter { get; init; }
 
     #region Mail
 

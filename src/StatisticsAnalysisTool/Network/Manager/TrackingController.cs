@@ -91,6 +91,13 @@ public class TrackingController : ITrackingController
 
     #region Tracking
 
+    public void SetTotalPlayerSilver(long silver, bool associateWithMarketActivity = true)
+    {
+        var normalizedSilver = Math.Max(silver, 0);
+        EntityController.LocalUserData.Silver = FixPoint.FromFloatingPointValue(normalizedSilver);
+        _mainWindowViewModel.MarketActivityBindings.UpdateBalance(normalizedSilver, associateWithMarketActivity);
+    }
+
     public async Task InitTrackingAsync()
     {
         await StartTrackingAsync();

@@ -23,6 +23,7 @@ public class JoinResponseHandler(TrackingController trackingController) : Respon
         var hadActiveStatisticsSession = trackingController.StatisticController.HasActiveSession;
 
         SetLocalUserData(value);
+        trackingController.SetTotalPlayerSilver(value.Silver.IntegerValue, false);
         trackingController.StatisticController.StartSession(value.Username);
         await trackingController.GatheringController.StartSessionAsync(value.Username);
         _ = SetApiUserData(value);

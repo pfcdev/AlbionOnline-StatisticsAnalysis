@@ -16,6 +16,7 @@ public class UpdateMoneyEvent
             if (parameters.ContainsKey(1))
             {
                 CurrentPlayerSilver = FixPoint.FromInternalValue(parameters[1].ObjectToLong() ?? 0);
+                HasCurrentPlayerSilver = true;
             }
         }
         catch (ArgumentNullException e)
@@ -26,4 +27,5 @@ public class UpdateMoneyEvent
     }
 
     public FixPoint CurrentPlayerSilver { get; }
+    public bool HasCurrentPlayerSilver { get; }
 }
