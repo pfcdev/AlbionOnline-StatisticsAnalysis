@@ -287,10 +287,13 @@ public class MarketController(TrackingController trackingController, MainWindowV
 
     public void UpdateSellOrderMarketData(IEnumerable<AuctionEntry> auctionOffers)
     {
-        foreach (var offer in auctionOffers)
+        var auctionOfferList = auctionOffers?.ToList() ?? [];
+        var marketLocation = ClusterController.CurrentCluster.Index.GetMarketLocationByLocationNameOrId();
+        mainWindowViewModel.MarketOrdersBindings.UpdateSellOrders(auctionOfferList, marketLocation);
+
+        foreach (var offer in auctionOfferList)
         {
             string locationIndex = ClusterController.CurrentCluster.Index;
-            MarketLocation marketLocation = locationIndex.GetMarketLocationByLocationNameOrId();
 
             if (marketLocation == MarketLocation.Unknown)
             {
@@ -329,6 +332,7 @@ public class MarketController(TrackingController trackingController, MainWindowV
         var auctionOrderList = auctionOrders?.ToList() ?? [];
         string locationIndex = ClusterController.CurrentCluster.Index;
         MarketLocation marketLocation = locationIndex.GetMarketLocationByLocationNameOrId();
+        mainWindowViewModel.MarketOrdersBindings.UpdateBuyOrders(auctionOrderList, marketLocation);
         if (SettingsController.CurrentSettings.Bm)
         {
             mainWindowViewModel.CraftingBindings.BlackMarket?.RecordCurrentBuyOrders(auctionOrderList, marketLocation);

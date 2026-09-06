@@ -26,6 +26,7 @@ using StatisticsAnalysisTool.Party;
 using StatisticsAnalysisTool.Properties;
 using StatisticsAnalysisTool.StorageHistory;
 using StatisticsAnalysisTool.Trade;
+using StatisticsAnalysisTool.Trade.Market;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -1713,6 +1714,8 @@ public class MainWindowViewModel : BaseViewModel
             OnPropertyChanged();
         }
     } = new();
+
+    public MarketOrdersBindings MarketOrdersBindings { get; } = new();
 
     public VaultBindings VaultBindings
     {
