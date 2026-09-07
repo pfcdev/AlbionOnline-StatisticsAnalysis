@@ -26,7 +26,20 @@ public partial class MarketActivityControl : UserControl
             return;
         }
 
+        if (ActivityDetailsPopup.IsOpen
+            && ActivityDetailsPopup.DataContext is MarketActivityRow openRow
+            && ReferenceEquals(openRow, row))
+        {
+            ActivityDetailsPopup.IsOpen = false;
+            return;
+        }
+
         ActivityDetailsPopup.DataContext = row;
         ActivityDetailsPopup.IsOpen = true;
+    }
+
+    private void CloseActivityDetailsPopup_OnClick(object sender, RoutedEventArgs e)
+    {
+        ActivityDetailsPopup.IsOpen = false;
     }
 }

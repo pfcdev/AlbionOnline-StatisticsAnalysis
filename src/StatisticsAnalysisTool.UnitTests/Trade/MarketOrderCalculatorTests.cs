@@ -61,6 +61,24 @@ public class MarketOrderCalculatorTests
     }
 
     [Test]
+    public void CalculateMinimum_WithMinimumPrice_IncludesOnlyOrdersAtOrAboveLimit()
+    {
+        MarketOrderRow[] orders =
+        [
+            CreateOrder(1, 100, 2),
+            CreateOrder(2, 125, 3),
+            CreateOrder(3, 150, 4)
+        ];
+
+        var result = MarketOrderCalculator.CalculateMinimum(orders, "125");
+
+        result.IsLimitValid.Should().BeTrue();
+        result.OrderCount.Should().Be(2);
+        result.TotalAmount.Should().Be(7);
+        result.TotalPrice.Should().Be(975);
+    }
+
+    [Test]
     public void UpdateSellOrders_SortsCheapestFirstAndRemovesDuplicateOrderIds()
     {
         var bindings = new MarketOrdersBindings();

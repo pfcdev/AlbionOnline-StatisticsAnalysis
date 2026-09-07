@@ -51,7 +51,7 @@ public sealed class MarketOrdersBindings : BaseViewModel
         }
     } = string.Empty;
 
-    public string MaximumBuyOrderPrice
+    public string MinimumBuyOrderPrice
     {
         get;
         set
@@ -212,21 +212,21 @@ public sealed class MarketOrdersBindings : BaseViewModel
 
     private void RecalculateBuyOrders()
     {
-        var calculation = MarketOrderCalculator.Calculate(_capturedBuyOrders, MaximumBuyOrderPrice);
+        var calculation = MarketOrderCalculator.CalculateMinimum(_capturedBuyOrders, MinimumBuyOrderPrice);
         BuyOrders = new ObservableCollection<MarketOrderRow>(calculation.MatchingOrders);
-        BuySummary = BuildSummary(calculation, "buy");
+        BuySummary = BuildSummary(calculation, "buy", true);
     }
 
-    private static string BuildSummary(MarketOrderCalculation calculation, string orderType)
+    private static string BuildSummary(MarketOrderCalculation calculation, string orderType, bool isMinimumLimit = false)
     {
         if (!calculation.IsLimitValid)
         {
-            return "Geçerli bir maksimum fiyat girin.";
+            return $"Geçerli bir {(isMinimumLimit ? "minimum" : "maksimum")} fiyat girin.";
         }
 
         var culture = CultureInfo.CurrentCulture;
         var prefix = calculation.MaximumUnitPrice.HasValue
-            ? $"{calculation.MaximumUnitPrice.Value.ToString("N0", culture)} silver ve altı"
+            ? $"{calculation.MaximumUnitPrice.Value.ToString("N0", culture)} silver ve {(isMinimumLimit ? "üstü" : "altı")}"
             : $"Tüm {orderType} order kayıtları";
 
         return $"{prefix}: {calculation.OrderCount:N0} ilan • {calculation.TotalAmount:N0} adet • Toplam {calculation.TotalPrice:N0} silver";

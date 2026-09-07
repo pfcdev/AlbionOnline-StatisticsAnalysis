@@ -37,9 +37,39 @@ internal static class MarketOrderCalculator
             matchingOrders.Sum(x => x.TotalPrice));
     }
 
+    public static MarketOrderCalculation CalculateMinimum(IEnumerable<MarketOrderRow> orders, string minimumUnitPriceText)
+    {
+        var orderList = orders?.ToList() ?? [];
+        if (!TryParseMinimumPrice(minimumUnitPriceText, out var minimumUnitPrice))
+        {
+            return new MarketOrderCalculation(false, null, [], 0, 0);
+        }
+
+        var matchingOrders = minimumUnitPrice.HasValue
+            ? orderList.Where(x => x.UnitPrice >= minimumUnitPrice.Value).ToList()
+            : orderList;
+
+        return new MarketOrderCalculation(
+            true,
+            minimumUnitPrice,
+            new ReadOnlyCollection<MarketOrderRow>(matchingOrders),
+            matchingOrders.Sum(x => (long) x.Amount),
+            matchingOrders.Sum(x => x.TotalPrice));
+    }
+
     internal static bool TryParseMaximumPrice(string value, out ulong? maximumUnitPrice)
     {
-        maximumUnitPrice = null;
+        return TryParsePrice(value, out maximumUnitPrice);
+    }
+
+    internal static bool TryParseMinimumPrice(string value, out ulong? minimumUnitPrice)
+    {
+        return TryParsePrice(value, out minimumUnitPrice);
+    }
+
+    private static bool TryParsePrice(string value, out ulong? unitPrice)
+    {
+        unitPrice = null;
         if (string.IsNullOrWhiteSpace(value))
         {
             return true;
@@ -60,7 +90,7 @@ internal static class MarketOrderCalculator
             return false;
         }
 
-        maximumUnitPrice = parsedValue;
+        unitPrice = parsedValue;
         return true;
     }
 }

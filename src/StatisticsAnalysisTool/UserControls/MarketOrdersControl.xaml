@@ -128,10 +128,10 @@
                             <ColumnDefinition Width="165" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Maksimum birim fiyat" VerticalAlignment="Center"
+                        <TextBlock Text="Minimum birim fiyat" VerticalAlignment="Center"
                                    Foreground="{StaticResource SolidColorBrush.Text.3}" />
                         <TextBox Grid.Column="1"
-                                 Text="{Binding MarketOrdersBindings.MaximumBuyOrderPrice, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding MarketOrdersBindings.MinimumBuyOrderPrice, UpdateSourceTrigger=PropertyChanged}"
                                  ToolTip="Örnek: 125000 veya 125.000" />
                     </Grid>
                     <TextBlock Grid.Row="2" Text="{Binding MarketOrdersBindings.BuySummary}"

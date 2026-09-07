@@ -217,19 +217,28 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
                         <Border Width="58" Height="58" Margin="0,0,12,0"
                                 Background="{StaticResource SolidColorBrush.Background.4}"
                                 BorderBrush="{StaticResource SolidColorBrush.Border.1}" BorderThickness="1">
                             <Image Source="{Binding Icon}" Width="56" Height="56" Stretch="Uniform" />
                         </Border>
-                        <StackPanel VerticalAlignment="Center">
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
                             <TextBlock Text="{Binding ItemName}" FontSize="18" FontWeight="SemiBold"
                                        Foreground="{StaticResource SolidColorBrush.Text.1}" />
                             <TextBlock Text="{Binding TierAndQuality}" Foreground="{StaticResource SolidColorBrush.Accent.Yellow.0}" />
                             <TextBlock Text="{Binding ActivityType}" Foreground="{StaticResource SolidColorBrush.Text.3}" />
                         </StackPanel>
-                    </StackPanel>
+                        <Button Grid.Column="2" Content="✕" Width="30" Height="30"
+                                Margin="12,0,0,0" VerticalAlignment="Top"
+                                Click="CloseActivityDetailsPopup_OnClick"
+                                ToolTip="Kapat" />
+                    </Grid>
 
                     <Grid Grid.Row="1" Margin="0,16,0,0">
                         <Grid.ColumnDefinitions>
@@ -266,7 +275,7 @@
 
                     <TextBlock Grid.Row="2" Margin="0,13,0,0" FontSize="11" TextWrapping="Wrap"
                                Foreground="{StaticResource SolidColorBrush.Text.5}"
-                               Text="İşlem sonrası bakiye yalnızca uygulama açıkken yakalanan ve bakiye paketiyle eşleşen hareketlerde gösterilir. Dışarı tıklayarak kapatabilirsiniz." />
+                               Text="İşlem sonrası bakiye yalnızca uygulama açıkken yakalanan ve bakiye paketiyle eşleşen hareketlerde gösterilir. Kapatmak için sağ üstteki düğmeye basın veya aynı satıra tekrar tıklayın." />
                 </Grid>
             </Border>
         </Popup>
